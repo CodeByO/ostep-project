@@ -36,9 +36,9 @@ int main(int argc, char* argv[]){
              while(!feof(fp))
             { 
                 printf("%s" , buffer);
-                fgets(buffer,size,fp);
+                fgets(buffer,size,fp); // 그 다음 개행 문자 까지 값을 읽음
             }
-        }else{ //fgets이
+        }else{ //fgets이 NULL 이면 그냥 처음 읽은 값만 출력 (빈값)
             printf("%s", buffer);  
         }
 
