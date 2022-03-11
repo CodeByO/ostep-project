@@ -14,8 +14,8 @@ int main(int argc, char* argv[]){
     for(i = 1; i < argc; i++){ // 인자로 받은 갯수 만큼 파일을 읽어서 출력한다.
         FILE *fp = fopen(argv[i],"r");
         char* buffer;
-        int size; 
-
+        int size;
+        
         if(fp == NULL){ // 파일 읽가 실패 하면 예외처리
             printf("wcat: cannot open file\n");
             exit(1);
@@ -31,9 +31,15 @@ int main(int argc, char* argv[]){
 
 
         fseek(fp, 0, SEEK_SET); // 파일 데이터를 읽기 위해 파일 포인터를 다시 파일의 맨 처음으로 이동
-        fread(buffer, size , 1 , fp); // 실제 파일 데이터를 읽음
 
-        printf("%s", buffer); 
+        if(fgets(buffer,size,fp) != NULL){
+             while(!feof(fp))
+            { 
+                printf("%s" , buffer); fgets(buffer , size ,fp); 
+            }
+        }else{
+            printf("%s", buffer);  
+        }
 
         fclose(fp);
 
