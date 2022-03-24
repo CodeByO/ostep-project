@@ -14,7 +14,7 @@ int main(int argc, char* argv[]){
 
     int size;
     char* tmp;
-    char* reverse[10];
+    
     int i = 0;
     char a,b;
 
@@ -23,6 +23,7 @@ int main(int argc, char* argv[]){
         fseek(fp,0,SEEK_END);
         size = ftell(fp);
         char buffer[size+1];
+        char* reverse[size+1];
         memset(buffer, 0, size+1);
         fseek(fp, 0, SEEK_SET);
     
@@ -84,6 +85,7 @@ int main(int argc, char* argv[]){
         fseek(fp,0,SEEK_END);
         size = ftell(fp);
         char buffer[size+1];
+        char* reverse[size+1];
         memset(buffer, 0, size+1);
 
         fseek(fp, 0, SEEK_SET);
