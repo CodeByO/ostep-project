@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
         fprintf(stderr,"usage: reverse <input> <output>\n");
         exit(1);
     }
-    
+
     int size;
     char* tmp;
     char* reverse[10];
@@ -36,13 +36,13 @@ int main(int argc, char* argv[]){
                 i++;
         }
             
-            int j;
-            for(j=i-1; j>=0; j--){
-                if(reverse[j] != NULL){
-                    strcat(reverse[j],"\n");
-                    printf("%s",reverse[j]);
-                }
+        int j;
+        for(j=i-1; j>=0; j--){
+            if(reverse[j] != NULL){
+                strcat(reverse[j],"\n");
+                printf("%s",reverse[j]);
             }
+        }
             
 
         fclose(fp);
@@ -98,13 +98,13 @@ int main(int argc, char* argv[]){
                 i++;
         }
             
-            int j;
-            for(j=i-1; j>=0; j--){
-                if(reverse[j] != NULL){
-                    strcat(reverse[j],"\n");
-                    fwrite(reverse[j],(int)strlen(reverse[j]),1,fp2);
-                }
+        int j;
+        for(j=i-1; j>=0; j--){
+            if(reverse[j] != NULL){
+                strcat(reverse[j],"\n");
+                fwrite(reverse[j],(int)strlen(reverse[j]),1,fp2);
             }
+        }
             
 
         fclose(fp);
