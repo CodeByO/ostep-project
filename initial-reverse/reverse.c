@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h> 
+#include <sys/stat.h> 
+#include <unistd.h>
+
 
 
 
@@ -15,10 +19,12 @@ int main(int argc, char* argv[]){
     char* tmp;
     
     int i = 0;
-    char a,b;
+    // char a,b;
 
     FILE *fp = NULL;
     FILE *fp2 = NULL;
+    struct stat sb1;
+    struct stat sb2;
 
     if(argc == 1 ){
         fp = stdin;
@@ -41,27 +47,33 @@ int main(int argc, char* argv[]){
 
     }
 
-    while(1){
-        //두개의 파일 모두 끝에 도달하지 않을 경우
-        if (feof(fp) == 0 && feof(fp2) == 0){
-                    
-            a = fgetc(fp);
-            b = fgetc(fp2);
-
-            if (a != b){
-                        
-                break;
-            }
-        }
-        //두개의 파일 모두 끝에 도달한 경우.
-        //(첫 번째 조건문에서 각 파일의 문자는 검사했기 때문에
-        //두 파일이 동시에 feof에 의해 탈출하면 동일한 파일인 것)
-        else{
+    if(stat(argv[1],&sb1) == 0 && stat(argv[2],&sb2) == 0){
+        if(sb1.st_ino == sb2.st_ino){
             fprintf(stderr,"reverse: input and output file must differ\n");
             exit(1);
-        }  
+        }
     }
-        
+    
+    //     while(1){
+    //     //두개의 파일 모두 끝에 도달하지 않을 경우
+    //     if (feof(fp) == 0 && feof(fp2) == 0){
+                    
+    //         a = fgetc(fp);
+    //         b = fgetc(fp2);
+
+    //         if (a != b){
+                        
+    //             break;
+    //         }
+    //     }
+    //     //두개의 파일 모두 끝에 도달한 경우.
+    //     //(첫 번째 조건문에서 각 파일의 문자는 검사했기 때문에
+    //     //두 파일이 동시에 feof에 의해 탈출하면 동일한 파일인 것)
+    //     else{
+    //         fprintf(stderr,"reverse: input and output file must differ\n");
+    //         exit(1);
+    //     }  
+    // }
     fseek(fp,0,SEEK_END);
     size = ftell(fp);
     char buffer[size+1];
